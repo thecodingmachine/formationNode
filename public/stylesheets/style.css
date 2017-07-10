@@ -1,0 +1,22 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+
+h1{
+  margin-bottom: 50px;
+}
+
+.elp-case{
+  padding: 0px;
+  margin: 0px;
+  height: 50px;
+  width: 50px;
+  border: 1px solid black;
+}
+
+.elp-container{
+  margin-bottom: 50px;
+}
+
