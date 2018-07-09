@@ -19,18 +19,18 @@ function init()
 
 function onOpen(evt)
 {
-    writeToScreen("CONNECTED");
+    writeToScreen("CONNECTED", "alert-success");
     doSend({ msg : 'newUser', id : myId});
 }
 
 function onClose(evt)
 {
-    writeToScreen("DISCONNECTED");
+    writeToScreen("DISCONNECTED", "alert-danger");
 }
 
 function onMessage(evt)
 {
-    writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data+'</span>');
+    writeToScreen(evt.data, "alert-warning");
     var data = JSON.parse(evt.data);
     if(gameObject && gameObject._id && gameObject._id != data._id){
         //console.error('wrong game')
@@ -38,7 +38,7 @@ function onMessage(evt)
         gameObject = data;
         if (gameObject.currentPlayer == myId) {
             myTurn = true;
-            writeToScreen('<span style="color: green;">YOUR TURN</span> ');
+            writeToScreen('YOUR TURN', "alert-success");
         } else {
             myTurn = false;
         }
@@ -58,19 +58,21 @@ function onMessage(evt)
 
 function onError(evt)
 {
-    writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+    writeToScreen(evt.data, "alert-danger");
 }
 
 function doSend(message)
 {
-    writeToScreen("SENT: " + JSON.stringify(message));
+    writeToScreen(JSON.stringify(message), "alert-info");
     websocket.send(JSON.stringify(message));
 }
 
-function writeToScreen(message)
+function writeToScreen(message, type)
 {
-    var pre = document.createElement("p");
+    var pre = document.createElement("div");
     pre.style.wordWrap = "break-word";
+    pre.classList.add("alert");
+    pre.classList.add(type);
     pre.innerHTML = message;
     output.appendChild(pre);
 }
@@ -89,7 +91,7 @@ for(var z = 0; z < anchors.length; z++) {
                 if(gameObject.caseArray && gameObject.caseArray.filter(function (_item) {
                         return _item.caseName == elem.id
                     }).length != 0){
-                    writeToScreen('<span style="color: red;">You CAN NOT PLAY HERE:</span> ');
+                    writeToScreen("YOU CAN NOT PLAY HERE", "alert-danger");
                 } else{
                     doSend({ msg : 'gameAction', gameId :gameObject._id, caseName : elem.id, userId : myId});
                 }
