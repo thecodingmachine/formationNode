@@ -41,7 +41,7 @@ mongoose.set('debug', function (collectionName, method, query, doc) {
 var timeout = 3000000;
 
 mongoose.connect(
-    'mongodb+srv://formationNodeUser:formationNodePassword@cluster0-kt0tr.mongodb.net/test?retryWrites=true&w=majority',
+    'mongodb://mongodb:27017/formation-node',
     {
       promiseLibrary: global.Promise,
       useNewUrlParser: true

@@ -1,4 +1,4 @@
-var wsUri = 'ws://localhost:3000';
+var wsUri = 'ws://localhost:8080';
 var output;
 var myTurn = false;
 var gameObject = null;
@@ -26,7 +26,7 @@ function onClose(evt) {
 }
 
 function onMessage(evt) {
-  writeToScreen(evt.data, 'alert-warning');
+  writeToScreen("RECEIVED : " + evt.data, 'alert-received');
   var data = JSON.parse(evt.data);
   if (gameObject && gameObject._id && gameObject._id !== data._id) {
     //console.error('wrong game')
@@ -58,17 +58,17 @@ function onError(evt) {
 }
 
 function doSend(message) {
-  writeToScreen(JSON.stringify(message), 'alert-info');
+  writeToScreen("SEND : " + JSON.stringify(message), 'alert-send');
   websocket.send(JSON.stringify(message));
 }
 
 function writeToScreen(message, type) {
-  var pre = document.createElement('div');
+  var pre = document.createElement('li');
   pre.style.wordWrap = 'break-word';
-  pre.classList.add('alert');
+  pre.classList.add('collection-item');
   pre.classList.add(type);
   pre.innerHTML = message;
-  output.appendChild(pre);
+  output.insertBefore(pre, output.firstChild);
 }
 
 window.addEventListener('load', init, false);
@@ -76,7 +76,7 @@ window.addEventListener('load', init, false);
 /**
  * CLICK
  */
-var anchors = document.getElementsByClassName('elp-case');
+var anchors = document.getElementsByClassName('t-case');
 for (var z = 0; z < anchors.length; z++) {
   var elem = anchors[z];
   elem.onclick = function(elem) {
@@ -96,6 +96,8 @@ for (var z = 0; z < anchors.length; z++) {
           });
         }
       }
+    } else {
+      writeToScreen('WAIT YOUR TURN', 'alert-danger');
     }
     return false;
   }.bind(this, elem);

@@ -1,27 +1,40 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding-left: 25px;
+  padding-right: 25px;
+  background-color: #f8f8f8;
 }
 
-
-h1{
-  margin-bottom: 50px;
+.col-tic-tac-toe{
+  width: 198px;
 }
 
-.elp-case{
+.col-log{
+  width: calc(100% - 198px);
+}
+
+.t-row{
+  margin: auto;
+  width: 150px;
+}
+
+.t-case{
   padding: 0px;
   margin: 0px;
   height: 50px;
-  width: 50px;
   border: 1px solid black;
+  display: inline;
 }
 
-.elp-row{
-  margin: auto;
-  max-width: 150px;
+.alert-danger{
+  background-color: #FF555E !important;
 }
-
-.elp-container{
-  margin-bottom: 50px;
+.alert-success{
+  background-color: #8BF18B !important;
+}
+.alert-received{
+  background-color: #FFE981!important;
+}
+.alert-send{
+  background-color: #83B2FF !important;
 }
 
