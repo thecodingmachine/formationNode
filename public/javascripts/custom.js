@@ -1,4 +1,4 @@
-var wsUri = 'ws://localhost:8080';
+var wsUri = 'ws://node.localhost';
 var output;
 var myTurn = false;
 var gameObject = null;
